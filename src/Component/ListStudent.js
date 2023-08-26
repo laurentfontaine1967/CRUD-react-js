@@ -10,10 +10,25 @@ function ListStudent() {
     loadUsers();
   }, []);
 
+  //   const loadUsers = async () => {
+  //     const result = await axios
+  //       .get("http://localhost/student/view.php")
+  //       .then((result) => {
+  //         if (result.data.status === "invalid") {
+  //           alert("pb.try again");
+  //         }
+  //       });
+
+  //     setStudent(result.data.records);
+
   const loadUsers = async () => {
-    const result = await axios.get("http://localhost/student/view.php");
-    setStudent(result.data.records);
-    // console.log(result);
+    try {
+      const result = await axios.get("http://localhost/student/view.php");
+      setStudent(result.data.records);
+    } catch (err) {
+      alert("no connection to database");
+    }
+    // Navigate("/");
   };
   const deleteUser = (id) => {
     axios
